@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<!--<head>
+		<title>ZOLLER-Web Service Query</title>
+	</head>-->
+	<style>
+	    body {
+			 background-color:#c4c6c8;
+		}
+		header {
+			  background-color:black;
+			  padding: 75px;
+			  text-align: center;
+			  font-size: 45px;
+			  font-weigh:bold;
+			  color:yellow;
+			  width:100%;
+			} 
+		.button{
+			   display: block; 
+			   cursor: pointer; 
+			   margin: 4px 2px; 
+			   padding: 10px 20px; 
+			   background-color: #f7f7f7; 
+			   text-align: center; 
+			   display: inline-block; 
+			   font-size: 14px; 
+			   font-weight:bold; 
+			   border-radius: 8px; 
+			   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); 
+			}
+		.button:hover{
+			   background-color:yellow; 
+			}
+		
+		.submitbutton{
+				width:750px; 
+				font-weight: bold; 
+				cursor: pointer; 
+				margin: 4px 2px; 
+				padding: 14px 28px; 
+				background-color: #f7f7f7; 
+				text-align: center; 
+				display: inline-block; 
+				font-size: 18px; 
+				border-radius: 8px; 
+				box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+			}
+		.submitbutton:hover{
+		box-shadow: 0 18px 36px 0 rgba(0,0,0,0.2), 0 9px 30px 0 rgba(0,0,0,0.19);
+		}
+		nav {
+		      float:right;
+			  border-top:15px solid #c4c6c8;
+			  width: 35%;
+			 
+			}
+		article {
+			  float:left;
+			  width:30%;
+			  padding: 20px;
+			  width: 750px;
+			  background-color: #c4c6c8;
+			  margin-left:20px;
+			  margin-right:5px;
+			}
+		.tooltip {
+				 position: relative;
+				  display: inline-block;
+				}				
+		.tooltip .tooltiptext {
+				  visibility: hidden;
+				  width: 430px;
+				  background-color:#ffffff;
+				  border: 1px solid black;
+				  opacity: 0.7;
+				  color: black;
+				  text-align: center;
+				  /* Position the tooltip */
+				  position: absolute;
+				  z-index: 1;
+				  top: -5px;
+				  left: 105%;
+				   
+				}
+		.tooltip:hover .tooltiptext {
+				  visibility: visible;
+				}
+				span.tooltiptext p {
+				  font-weight: bold;
+				  font-size: 15px;
+				  color: black;
+				}
+		<!--@media (max-width: 750px) {
+			  nav, article {
+				width: 100%;
+				height: auto;}-->
+			  
+	</style>
+	<body>
+	<header>ZOLLER DB Service Query</header>
+<section class="1" display="flex;">
+	<article>
+		<div style="background-color:darkgrey;padding:.5px;border-top: 15px solid #c4c6c8; border-bottom: 25px solid #c4c6c8; width:750px;">
+			<h2 style="color:black;">DB Service Information</h2>
+		</div>
+			<form method= "POST" action="non-Ajax form handler" id="Form" class="pure-form">
+				
+				<b style="font-size:20px;margin-left:60px;">Characteristic Structure:</b>
+				<br><br>
+				<select id="CharacteristicStructure"required style="margin-left:60px;width:450px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 14px; background-color: white; padding: 6px 10px 6px 20px; ">
+					<option value="Esprit">ESPRIT (only avaliable for resource type "Tool")</option>
+					<option value="DIN4000">DIN4000 (only avaliable for resource type "Component")</option>
+					<option value="MasterCam">MasterCam </option>
+					<option value="Vericut">Vericut</option>
+					<option value="NC">NC</option>
+					<option value="GibbsCam">GibbsCam</option>
+					<option value="PowerMill">PowerMill</option>
+					<option value="EdgeCam">EdgeCam</option>
+				</select>
+				<br><br>
+				<br>
+				<div style="font-size:20px;margin-left:60px;"><b>Computer Name:*</b>
+				</div><br>
+				<div class="tooltip">
+				<input type="text" id="ComputerName" required  placeholder="DELLPC0000" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "><br><br><br>
+					<span class="tooltiptext"><p> Where <i>Computer Name</i> is the name of computer equipped with ZOLLER DB Service.</p></span>
+				</div><br>	
+				<b style="font-size:20px;margin-left:60px;">Name of Graphics Folder: </b><br><br>
+				<input type="text" id="GraphicFolder" required placeholder="ToolAssembly_STP" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "><br><br>
+				<div style="background-color:darkgrey;padding:.5px;border-top: 15px solid #c4c6c8; border-bottom: 25px solid #c4c6c8; width:750px;">
+					<h2 style="color:black;">Search By:</h2>
+				</div><br>
+				<b style="font-size:20px;margin-left:60px;">Select a Resource Type:</b>
+				<br>
+				<br>
+				<div id="ResourceType" style="font-size:17px; font-weight: bold; margin-left:75px;">
+				  <input  type="radio" id="r1" name="ResourceType" value="Tool" required> Tool
+				  <br>
+				  <br>
+				  <input type="radio" id="r2" name="ResourceType" value="Component"required> Component
+				</div>
+				<br><br>
+				<div style="font-size:20px">
+					<b style="font-size:20px;margin-left:60px;">ID no:</b>
+				</div><br>
+				<div class="tooltip">
+				<input type="text" id="Condition1" required placeholder="T_0001" style=" margin-left:60px; width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "></b><br><br><br></b>
+					<span class="tooltiptext">
+						<p>If every Id no. should be searched, enter: <b style="font-size:110%;">'%'</b></p>
+					</span>
+				</div><br>
+				
+				<div style="font-size:20px">
+					<b style="font-size:20px;margin-left:60px;">Tool Type:</b>
+				</div>
+				<br>
+				<div class="tooltip">
+				<input type="text" id="Condition2" required placeholder="'DRILL' " style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "><br><br>
+					<span class="tooltiptext">
+						<p>Use Characteristic Structure Tool Names and place value in quotations Ex: <b style="font-size:110%;">'DRILL' ,   'MILL'</b></p>
+					</span>
+				</div><br>
+				<div style="background-color:darkgrey;padding:.5px;border-top: 15px solid #c4c6c8; border-bottom: 25px solid #c4c6c8; width:750px;">
+					<h2 style="color:black;">Parametric Search Parameters</h2>
+				</div>
+				<br>
+				<b style="margin-left:60px;font-size:20px">Condition 1:</b><br><br><input type="text" id="Condition3" placeholder="Optional  Ex:  C.Tool_Diameter between 1 and 10" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; " > <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 2</b><br><br><input type="text" id="Condition4" placeholder="Optional   Ex:  C.Tool_Length between 100 and 150" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "> <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 3:</b><br><br><input type="text" id="Condition5" placeholder="Optional   Ex:  C.Coolant=5" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; " > <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 4:</b><br><br><input type="text" id="Condition6" placeholder="Optional   Ex:  C.Cutting_Lenght between 50 and 75" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; " > <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 5:</b><br><br><input type="text" id="Condition7" placeholder="Optional   Ex:  C.Shank_Diameter between 8 and 10" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "> <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 6:</b><br><br><input type="text" id="Condition8" placeholder="Optional   Ex:  C.Tip_Angle=140" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "> <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 7:</b> <br><br><input type="text" id="Condition9" placeholder="Optional   Ex:  C.Number_Of_Flutes=2" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "> <br><br><br><br>
+				<b style="margin-left:60px;font-size:20px">Condition 8: </b><br><br><input type="text" id="Condition10" placeholder="Optional   Ex:  C.ShankType=0" style="margin-left:60px;width:400px; border: 2px solid #c4c6c8; border-radius: 4px; font-size: 16px; background-color: white; padding: 6px 10px 6px 20px; "> <br><br><br><br>
+				<Input class="submitbutton" type="submit" value= "Submit" >
+			</form>
+		<br><br>
+	</article>
+	<nav id="nav">
+		<p id="resultsFound" style="  font-family: Arial Black, Helvetica, sans-serif;font-size:30px;font-weigh:bold; margin-top:150px;margin-left:25px; color:red;"></p>
+		<div id="titleTop">
+			<h2 id="toad"></h2>
+		</div>
+	</nav>
+</section>		
+		<script>
+			document.querySelector('form.pure-form').addEventListener("submit", function (e) {
+				//prevent the normal submission of the form
+				e.preventDefault();				
+			var allInputs = Form.getElementsByTagName('input');
+			for (var i = 0; i < allInputs.length; i++) {
+				var input = allInputs[i];
+					if (input.name && !input.value) {
+						input.value = '';} 
+					};						
+					if (document.getElementById('r1').checked) {
+						var ResourceTypeValue = "Tool";} 
+							else {
+						var ResourceTypeValue = "Component"
+							};
+			var CharacteristicStructureValue=CharacteristicStructure.value;
+			var ComputerNameValue = ComputerName.value;
+			var GraphicFolderValue= encodeURIComponent(GraphicFolder.value);
+			var Condition1Value= encodeURIComponent("ToolId="+Condition1.value+' and ');
+			var Condition2Value= encodeURIComponent("C.Type="+Condition2.value);
+			var params = ResourceTypeValue+"?expression="+Condition1Value+Condition2Value;
+			var Conditions=""
+			var Con3=Condition3.value; if(!Condition3.value){Con3=""} else {
+				Conditions+=encodeURIComponent(' and '+Con3);
+				};
+			var Con4=Condition4.value; if(!Condition4.value){Con4=""} else {
+				Conditions+=encodeURIComponent(' and '+Con4);
+				};
+			var Con5=Condition5.value; if(!Condition5.value){Con5=""} else {
+				Conditions+=encodeURIComponent(' and '+Con5);
+				};
+			var Con6=Condition6.value; if(!Condition6.value){Con6=""} else {
+				Conditions+=encodeURIComponent(' and '+Con6);
+				};
+			var Con7=Condition7.value; if(!Condition7.value){Con7=""} else {
+				Conditions+=encodeURIComponent(' and '+Con7);
+				};
+			var Con8=Condition8.value; if(!Condition8.value){Con8=""} else {
+				Conditions+=encodeURIComponent(' and '+Con8);
+				};
+			var Con9=Condition9.value; if(!Condition9.value){Con9=""} else {
+				Conditions+=encodeURIComponent(' and '+Con9);
+				};
+			var Con10=Condition10.value; if(!Condition10.value){Con10=""} else {
+				Conditions+=encodeURIComponent(' and '+Con10);
+				};
+			var baseurl ="http://"+ComputerNameValue+"/zollerdbservice/";
+			const selectfile=encodeURIComponent(' select GraphicFile5');
+			var url = baseurl+params+Conditions+selectfile;
+			console.log(url); 
+			fetch(url)
+				.then(function(response) {
+					// When the page is loaded convert it to text
+					return response.text()
+				})
+				.then(function(url) {
+					// Initialize the DOM parser
+					var parser = new DOMParser();
+					// Parse the text
+					var doc = parser.parseFromString(url, "text/html");
+					// You can now even select part of that html as you would in the regular DOM 
+					
+					// Create a <p> node
+					var poppi= document.getElementById("titleTop")
+					poppi.setAttribute("style", "width:340px; background-color:darkgrey; padding: 25px; margin-top:15px; border-radius: 8px; ")
+					var pam= document.getElementById("toad")
+					pam.innerHTML = "Download STP Files";
+					pam.setAttribute("style","text-decoration:underline;color:black; text-align:center;")
+					var DList = document.createElement("ul"); 
+					DList.setAttribute("id","theList");
+					DList.setAttribute("style","background:darkgrey; width: 300px; border-radius: 8px; margin-top:65px; text-align:left;");
+					document.getElementById("toad").appendChild(DList);
+					var nodeList = doc.body.firstElementChild.childNodes[0].childNodes;
+					for(var value of nodeList.values()) { 
+							var tool= value.firstElementChild.childNodes[1].childNodes[0];
+							//console.log(tool.textContent);
+							var fileName=tool.textContent;
+							var loc = baseurl+"Graphic/"+GraphicFolderValue+"/";
+							var stpFile= loc+fileName;
+							console.log("Tool match:"+fileName); 
+							var node = document.createElement("LI"); 
+							var btn  = document.createElement("button")
+							document.getElementById("theList").appendChild(node);
+							node.appendChild(btn)
+							//document.body.insertBefore(btn,BrowseResponse);
+							btn.innerHTML = fileName;
+							btn.setAttribute("id",loc);
+							btn.setAttribute("class","button");
+							btn.setAttribute("type","button");
+							btn.setAttribute("name",fileName);
+							btn.setAttribute("onclick","window.open(id+name)");
+						};
+					console.log("Number of matches to search parameters:"+nodeList.length)
+					document.getElementById("resultsFound").innerHTML="Result(s) Found:"+nodeList.length
+					var elmnt= document.getElementById("nav");
+					elmnt.scrollIntoView();
+				})
+				.catch(function(err) {  
+					window.alert('Failed to fetch page.  '+err+'.    See console for more infomraiton.', err);  
+					});
+			});
+		</script>
+	</body>
+</html>
